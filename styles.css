@@ -1,0 +1,52 @@
+:root {
+  --nxu-max-width: 760px;
+}
+
+body {
+  line-height: 1.62;
+}
+
+.navbar {
+  border-bottom: 1px solid rgba(127, 127, 127, 0.22);
+}
+
+.quarto-title-banner {
+  background: transparent;
+}
+
+.quarto-title h1.title {
+  font-size: 2.1rem;
+  letter-spacing: 0;
+}
+
+main.content,
+.page-columns .content {
+  max-width: var(--nxu-max-width);
+}
+
+.listing-title {
+  font-weight: 600;
+}
+
+.listing-description {
+  color: var(--bs-secondary-color);
+}
+
+pre,
+code {
+  font-size: 0.94em;
+}
+
+.callout {
+  border-radius: 6px;
+}
+
+.theorem,
+.proof {
+  margin: 1.25rem 0;
+}
+
+.math.display {
+  overflow-x: auto;
+  overflow-y: hidden;
+}

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Neil Xu</title>
+<link>https://blog.neilzxu.me/</link>
+<atom:link href="https://blog.neilzxu.me/index.xml" rel="self" type="application/rss+xml"/>
+<description>Notes on statistics, machine learning, and research.</description>
+<generator>quarto-1.9.38</generator>
+<lastBuildDate>Wed, 01 Jul 2026 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>A first math note</title>
+  <dc:creator>Neil Xu</dc:creator>
+  <link>https://blog.neilzxu.me/posts/welcome/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>This is a sample post showing the authoring workflow for the blog. You can edit this file in VS Code with the Quarto extension and use the visual editor when that is helpful.</p>
+<p>Inline math works with dollar delimiters, as in <img src="https://latex.codecogs.com/png.latex?X_1,%20%5Cldots,%20X_n%20%5Csim%20P">. Display math works with double-dollar delimiters:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbar%20X_n%20=%20%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi=1%7D%5En%20X_i.%0A"></p>
+<p>For example, if <img src="https://latex.codecogs.com/png.latex?X_i"> are independent with mean <img src="https://latex.codecogs.com/png.latex?%5Cmu">, then</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathbb%7BE%7D%5B%5Cbar%20X_n%5D%20=%20%5Cmu.%0A"></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This site uses MathJax, which is a good default for research math because it supports a broad subset of LaTeX notation.</p>
+</div>
+</div>
+<section id="theorem-style-writing" class="level2">
+<h2 class="anchored" data-anchor-id="theorem-style-writing">Theorem-style writing</h2>
+<p>You can write theorem-like blocks directly in Markdown:</p>
+<p><strong>Lemma.</strong> Let <img src="https://latex.codecogs.com/png.latex?X"> be integrable. Then for any constant <img src="https://latex.codecogs.com/png.latex?a">,</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathbb%7BE%7D%5BX%20-%20a%5D%20=%20%5Cmathbb%7BE%7D%5BX%5D%20-%20a.%0A"></p>
+<p><strong>Proof.</strong> This follows by linearity of expectation. <img src="https://latex.codecogs.com/png.latex?%5Csquare"></p>
+<p>Citations also work through Pandoc and Quarto; for example, see <span class="citation" data-cites="robbins1970statistical">(Robbins 1970)</span>.</p>
+</section>
+<section id="code" class="level2">
+<h2 class="anchored" data-anchor-id="code">Code</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> np</span>
+<span id="cb1-2"></span>
+<span id="cb1-3">x <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.0</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2.0</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3.0</span>])</span>
+<span id="cb1-4">x.mean()</span></code></pre></div></div>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-robbins1970statistical" class="csl-entry">
+Robbins, Herbert. 1970. <span>“Statistical Methods Related to the Law of the Iterated Logarithm.”</span> <em>The Annals of Mathematical Statistics</em> 41 (5): 1397–409.
+</div>
+</div></section></div> ]]></description>
+  <category>statistics</category>
+  <category>math</category>
+  <guid>https://blog.neilzxu.me/posts/welcome/</guid>
+  <pubDate>Wed, 01 Jul 2026 04:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>

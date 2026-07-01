@@ -1,0 +1,37 @@
+[
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "A first math note",
+    "section": "",
+    "text": "This is a sample post showing the authoring workflow for the blog. You can edit this file in VS Code with the Quarto extension and use the visual editor when that is helpful.\nInline math works with dollar delimiters, as in \\(X_1, \\ldots, X_n \\sim P\\). Display math works with double-dollar delimiters:\n\\[\n\\bar X_n = \\frac{1}{n}\\sum_{i=1}^n X_i.\n\\]\nFor example, if \\(X_i\\) are independent with mean \\(\\mu\\), then\n\\[\n\\mathbb{E}[\\bar X_n] = \\mu.\n\\]"
+  },
+  {
+    "objectID": "posts/welcome/index.html#theorem-style-writing",
+    "href": "posts/welcome/index.html#theorem-style-writing",
+    "title": "A first math note",
+    "section": "Theorem-style writing",
+    "text": "Theorem-style writing\nYou can write theorem-like blocks directly in Markdown:\nLemma. Let \\(X\\) be integrable. Then for any constant \\(a\\),\n\\[\n\\mathbb{E}[X - a] = \\mathbb{E}[X] - a.\n\\]\nProof. This follows by linearity of expectation. \\(\\square\\)\nCitations also work through Pandoc and Quarto; for example, see (Robbins 1970)."
+  },
+  {
+    "objectID": "posts/welcome/index.html#code",
+    "href": "posts/welcome/index.html#code",
+    "title": "A first math note",
+    "section": "Code",
+    "text": "Code\nimport numpy as np\n\nx = np.array([1.0, 2.0, 3.0])\nx.mean()"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "I am Neil Xu. I work on statistics and machine learning.\nThis blog is for technical notes, research ideas, and longer-form writing that benefits from math, citations, code, and reproducible examples.\nMain site: https://neilzxu.me"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Blog",
+    "section": "",
+    "text": "Notes on statistics, machine learning, and research.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nA first math note\n\n\n\nstatistics\n\nmath\n\n\n\nA sample Quarto post with TeX math, citations, and theorem-style writing.\n\n\n\n\n\nJul 1, 2026\n\n\nNeil Xu\n\n\n\n\n\nNo matching items"
+  }
+]
