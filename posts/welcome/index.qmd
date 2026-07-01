@@ -1,0 +1,54 @@
+---
+title: "A first math note"
+description: "A sample Quarto post with TeX math, citations, and theorem-style writing."
+author: "Neil Xu"
+date: "2026-07-01"
+categories: [statistics, math]
+bibliography: ../../references.bib
+---
+
+This is a sample post showing the authoring workflow for the blog.
+You can edit this file in VS Code with the Quarto extension and use the visual
+editor when that is helpful.
+
+Inline math works with dollar delimiters, as in $X_1, \ldots, X_n \sim P$.
+Display math works with double-dollar delimiters:
+
+$$
+\bar X_n = \frac{1}{n}\sum_{i=1}^n X_i.
+$$
+
+For example, if $X_i$ are independent with mean $\mu$, then
+
+$$
+\mathbb{E}[\bar X_n] = \mu.
+$$
+
+::: {.callout-note}
+This site uses MathJax, which is a good default for research math because it
+supports a broad subset of LaTeX notation.
+:::
+
+## Theorem-style writing
+
+You can write theorem-like blocks directly in Markdown:
+
+**Lemma.** Let $X$ be integrable. Then for any constant $a$,
+
+$$
+\mathbb{E}[X - a] = \mathbb{E}[X] - a.
+$$
+
+**Proof.** This follows by linearity of expectation. $\square$
+
+Citations also work through Pandoc and Quarto; for example, see
+[@robbins1970statistical].
+
+## Code
+
+```python
+import numpy as np
+
+x = np.array([1.0, 2.0, 3.0])
+x.mean()
+```

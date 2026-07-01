@@ -1,0 +1,60 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - "*.qmd"
+    - "posts/**/*.qmd"
+
+website:
+  title: "Neil Xu"
+  site-url: "https://blog.neilzxu.me"
+  description: "Notes on statistics, machine learning, and research."
+  favicon: assets/favicon.png
+  open-graph: true
+  twitter-card: true
+  navbar:
+    title: "Neil Xu"
+    left:
+      - text: "Blog"
+        href: index.qmd
+      - text: "About"
+        href: about.qmd
+      - text: "Main site"
+        href: "https://neilzxu.me"
+    right:
+      - icon: github
+        href: "https://github.com/neilzxu"
+      - icon: rss
+        href: index.xml
+  page-footer:
+    left: "Copyright 2026, Neil Xu"
+    right:
+      - text: "Main site"
+        href: "https://neilzxu.me"
+
+format:
+  html:
+    theme:
+      light: cosmo
+      dark: darkly
+    css: styles.css
+    toc: true
+    code-copy: true
+    code-overflow: wrap
+    html-math-method: mathjax
+    include-in-header:
+      text: |
+        <script>
+        window.MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true
+          }
+        };
+        </script>
+
+execute:
+  freeze: auto
+
+editor: visual

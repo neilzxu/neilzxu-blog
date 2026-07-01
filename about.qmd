@@ -1,0 +1,10 @@
+---
+title: "About"
+---
+
+I am Neil Xu. I work on statistics and machine learning.
+
+This blog is for technical notes, research ideas, and longer-form writing that
+benefits from math, citations, code, and reproducible examples.
+
+Main site: <https://neilzxu.me>
