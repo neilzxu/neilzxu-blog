@@ -1,54 +1,55 @@
 ---
-title: "A first math note"
-description: "A sample Quarto post with TeX math, citations, and theorem-style writing."
-author: "Neil Xu"
-date: "2026-07-01"
-categories: [statistics, math]
+title: "A note on PPO"
+description: "The first half of the DPO formula"
+author: "Neil"
+date: "2026-06-30"
+categories: [LLM, RL]
 bibliography: ../../references.bib
 ---
 
-This is a sample post showing the authoring workflow for the blog.
-You can edit this file in VS Code with the Quarto extension and use the visual
-editor when that is helpful.
+A lot of *RL* algorithms of late are focusing on KL divergence. Since it's a core interview question, let's work through the RLHF + PPO formulation and its relation to DPO. The first part of which is getting an analytic representation of the optimal policy. Everything I have learned about *RL* I have learned from @rlhf2026lambert or GPT and below is no exception.
 
-Inline math works with dollar delimiters, as in $X_1, \ldots, X_n \sim P$.
-Display math works with double-dollar delimiters:
+Ok, so we take for granted that the PPO objective is a good idea, which [not everyone does](https://arxiv.org/abs/2407.13399). What is it anyways? 
 
-$$
-\bar X_n = \frac{1}{n}\sum_{i=1}^n X_i.
-$$
+Let $r$ be our reward function that takes in a context $x$ and a completion $y$, i.e., the LLM output based on $x$. Thus, $r(x, y)$ is the reward or "goodness" or the completion $y$ for $x$. Somehow, we never see this reward in real life. 
 
-For example, if $X_i$ are independent with mean $\mu$, then
+We can let $\mathcal{Y}$ be the (discrete) domain of $y$. 
 
-$$
-\mathbb{E}[\bar X_n] = \mu.
-$$
+$\pi_{\text{ref}}$ is reference policy that we wish to stay close in KL distance to. Why do we do this? I'm not sure really, especially since PPO has different roots than from RL on LLMs. "Our experiments test PPO on a collection of benchmark tasks, including simulated robotic locomotion and Atari game playing, and we show that PPO outperforms other online policy gradient methods, and overall strikes a favorable balance between sample complexity, simplicity, and wall-time." Huh.
 
-::: {.callout-note}
-This site uses MathJax, which is a good default for research math because it
-supports a broad subset of LaTeX notation.
-:::
+ Then, the PPO objective is to solve the following optimization problem, where $\texttt{P}$ is the true distribution of contexts and $\beta$ is a positive real hyperparameter:
 
-## Theorem-style writing
+$$ \max_{\text{policy} \pi} \mathbb{E}_{Y \sim \pi(\cdot \mid X), X \sim \texttt{P}}[r(X, Y)] - \beta \mathbb{E}_{X \sim \texttt{P}}[D_{\text{KL}}(\pi( \cdot \mid X) || \pi_{\text{ref}}( \cdot \mid X)] $$
 
-You can write theorem-like blocks directly in Markdown:
+Here, $D_{\text{KL}}$ is KL divergence which is defined as
 
-**Lemma.** Let $X$ be integrable. Then for any constant $a$,
+$$D_{\text{KL}}(P || Q) = \mathbb{E}_{X \sim P}\left[\log \frac{P(X)}{Q(X)}\right].$$
 
-$$
-\mathbb{E}[X - a] = \mathbb{E}[X] - a.
-$$
+I had to refer to the [Wikipedia page](https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence) while looking up the definition of KL, and the following seems to be an application of Donsker-Varadhan. But that is somewhat difficult to read and intuitively get.
 
-**Proof.** This follows by linearity of expectation. $\square$
+Let's pretend that $\mathcal{X}$ and $\mathcal{Y}$ are countable for simplicity (which it is for LLMs) and $r$ is bounded (which I believe is necessary). We can reformulate the above objective as follows:
 
-Citations also work through Pandoc and Quarto; for example, see
-[@robbins1970statistical].
+$$ \max_{\text{policy}\ \pi} \mathbb{E}_{Y \sim \pi(\cdot \mid X), X \sim \texttt{P}}[r(X, Y) - \beta \log \pi(Y \mid X) + \beta \log \pi_{\text{ref}}(Y \mid X)].$$
 
-## Code
+Now, we will proceed by realizing that the KL minimizer of a distribution $\texttt{P}$ is $\texttt{P}$ itself --- forward or reverse (what we're doing here is reverse) KL, it's all the same. So instead of doing KKT or something, we can just make a distribution. The above optimization formula can now be formulated
 
-```python
-import numpy as np
+$$ \max_{\text{policy}\ \pi} \beta \sum_{x \in \mathcal{X}} \sum_{y \in \mathcal{Y}} ((r(x, y) / \beta + \log \pi_{\text{ref}}(y \mid x) - \log \pi(y \mid x)) \pi(y \mid x) \cdot \texttt{P}(x).$$
 
-x = np.array([1.0, 2.0, 3.0])
-x.mean()
-```
+Well let's focus on the inner optimization, since we are now choosing a different probability distribution for each value of $x \in \mathcal{X}$. We will also add a constant $z(x)$ (which is fine since it's a constant):
+
+$$ \max_{\text{distribution}\ \pi(\cdot \mid x)} \beta  \sum_{y \in \mathcal{Y}} ((r(x, y) / \beta + \log \pi_{\text{ref}}(y \mid x) + \log z(x) - \log \pi(y \mid x)) \pi(y \mid x)$$
+
+where
+
+$$z(x) = \sum_{y \in \mathcal{Y}}\pi_{\text{ref}}(y \mid x)\exp(r(x, y) / \beta).$$
+
+Our reason for doing so is because we can now define the probability distribution:
+
+$$ \pi^*(y \mid x) = \frac{\pi_{\text{ref}}(y \mid x)\exp(r(x, y) / \beta)}{z(x)}$$
+
+and substitute it into our inner maximization to get that
+
+$$ \max_{\text{distribution}\ \pi(\cdot \mid x)} \beta D_{\text{KL}}(\pi(\cdot \mid x) || \pi^*(\cdot \mid x)). $$
+
+Naturally picking $\pi = \pi^*$ maximizes this, and we get that $\pi^*$ is the solution to PPO. No one has been super interested in this solution previously because we don't have access to $r(x, y)$ possibly? Perhaps it was useful to inverse RL people.
+
