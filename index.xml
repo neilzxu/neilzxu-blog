@@ -10,7 +10,7 @@
 <atom:link href="https://blog.neilzxu.me/index.xml" rel="self" type="application/rss+xml"/>
 <description>Notes on statistics, machine learning, and research.</description>
 <generator>quarto-1.9.38</generator>
-<lastBuildDate>Wed, 01 Jul 2026 04:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 01 Jul 2026 00:00:00 GMT</lastBuildDate>
 <item>
   <title>A first math note</title>
   <dc:creator>Neil Xu</dc:creator>
@@ -78,7 +78,7 @@ Robbins, Herbert. 1970. <span>“Statistical Methods Related to the Law of the I
   <category>statistics</category>
   <category>math</category>
   <guid>https://blog.neilzxu.me/posts/welcome/</guid>
-  <pubDate>Wed, 01 Jul 2026 04:00:00 GMT</pubDate>
+  <pubDate>Wed, 01 Jul 2026 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
