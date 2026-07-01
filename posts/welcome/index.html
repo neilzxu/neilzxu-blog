@@ -6,11 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Neil Xu">
-<meta name="dcterms.date" content="2026-07-01">
-<meta name="description" content="A sample Quarto post with TeX math, citations, and theorem-style writing.">
+<meta name="author" content="Neil">
+<meta name="dcterms.date" content="2026-06-30">
+<meta name="description" content="The first half of the DPO formula">
 
-<title>A first math note – Neil Xu</title>
+<title>A note on PPO – Neil Xu</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -25,41 +25,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 /* CSS for citations */
 div.csl-bib-body { }
@@ -173,11 +138,11 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="A first math note – Neil Xu">
-<meta property="og:description" content="A sample Quarto post with TeX math, citations, and theorem-style writing.">
+<meta property="og:title" content="A note on PPO – Neil Xu">
+<meta property="og:description" content="The first half of the DPO formula">
 <meta property="og:site_name" content="Neil Xu">
-<meta name="twitter:title" content="A first math note – Neil Xu">
-<meta name="twitter:description" content="A sample Quarto post with TeX math, citations, and theorem-style writing.">
+<meta name="twitter:title" content="A note on PPO – Neil Xu">
+<meta name="twitter:description" content="The first half of the DPO formula">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -396,15 +361,8 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#theorem-style-writing" id="toc-theorem-style-writing" class="nav-link active" data-scroll-target="#theorem-style-writing">Theorem-style writing</a></li>
-  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code">Code</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -412,16 +370,16 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">A first math note</h1>
+<h1 class="title">A note on PPO</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">statistics</div>
-    <div class="quarto-category">math</div>
+    <div class="quarto-category">LLM</div>
+    <div class="quarto-category">RL</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    A sample Quarto post with TeX math, citations, and theorem-style writing.
+    The first half of the DPO formula
   </div>
 </div>
 
@@ -431,14 +389,14 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Neil Xu </p>
+             <p>Neil </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">July 1, 2026</p>
+      <p class="date">June 30, 2026</p>
     </div>
   </div>
   
@@ -450,52 +408,36 @@ window.Quarto = {
 </header>
 
 
-<p>This is a sample post showing the authoring workflow for the blog. You can edit this file in VS Code with the Quarto extension and use the visual editor when that is helpful.</p>
-<p>Inline math works with dollar delimiters, as in <span class="math inline">\(X_1, \ldots, X_n \sim P\)</span>. Display math works with double-dollar delimiters:</p>
-<p><span class="math display">\[
-\bar X_n = \frac{1}{n}\sum_{i=1}^n X_i.
-\]</span></p>
-<p>For example, if <span class="math inline">\(X_i\)</span> are independent with mean <span class="math inline">\(\mu\)</span>, then</p>
-<p><span class="math display">\[
-\mathbb{E}[\bar X_n] = \mu.
-\]</span></p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This site uses MathJax, which is a good default for research math because it supports a broad subset of LaTeX notation.</p>
-</div>
-</div>
-<section id="theorem-style-writing" class="level2">
-<h2 class="anchored" data-anchor-id="theorem-style-writing">Theorem-style writing</h2>
-<p>You can write theorem-like blocks directly in Markdown:</p>
-<p><strong>Lemma.</strong> Let <span class="math inline">\(X\)</span> be integrable. Then for any constant <span class="math inline">\(a\)</span>,</p>
-<p><span class="math display">\[
-\mathbb{E}[X - a] = \mathbb{E}[X] - a.
-\]</span></p>
-<p><strong>Proof.</strong> This follows by linearity of expectation. <span class="math inline">\(\square\)</span></p>
-<p>Citations also work through Pandoc and Quarto; for example, see <span class="citation" data-cites="robbins1970statistical">(<a href="#ref-robbins1970statistical" role="doc-biblioref">Robbins 1970</a>)</span>.</p>
-</section>
-<section id="code" class="level2">
-<h2 class="anchored" data-anchor-id="code">Code</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array([<span class="fl">1.0</span>, <span class="fl">2.0</span>, <span class="fl">3.0</span>])</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>x.mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A lot of <em>RL</em> algorithms of late are focusing on KL divergence. Since it’s a core interview question, let’s work through the RLHF + PPO formulation and its relation to DPO. The first part of which is getting an analytic representation of the optimal policy. Everything I have learned about <em>RL</em> I have learned from <span class="citation" data-cites="rlhf2026lambert">Lambert (<a href="#ref-rlhf2026lambert" role="doc-biblioref">2026</a>)</span> or GPT and below is no exception.</p>
+<p>Ok, so we take for granted that the PPO objective is a good idea, which <a href="https://arxiv.org/abs/2407.13399">not everyone does</a>. What is it anyways?</p>
+<p>Let <span class="math inline">\(r\)</span> be our reward function that takes in a context <span class="math inline">\(x\)</span> and a completion <span class="math inline">\(y\)</span>, i.e., the LLM output based on <span class="math inline">\(x\)</span>. Thus, <span class="math inline">\(r(x, y)\)</span> is the reward or “goodness” or the completion <span class="math inline">\(y\)</span> for <span class="math inline">\(x\)</span>. Somehow, we never see this reward in real life.</p>
+<p>We can let <span class="math inline">\(\mathcal{Y}\)</span> be the (discrete) domain of <span class="math inline">\(y\)</span>.</p>
+<p><span class="math inline">\(\pi_{\text{ref}}\)</span> is reference policy that we wish to stay close in KL distance to. Why do we do this? I’m not sure really, especially since PPO has different roots than from RL on LLMs. “Our experiments test PPO on a collection of benchmark tasks, including simulated robotic locomotion and Atari game playing, and we show that PPO outperforms other online policy gradient methods, and overall strikes a favorable balance between sample complexity, simplicity, and wall-time.” Huh.</p>
+<p>Then, the PPO objective is to solve the following optimization problem, where <span class="math inline">\(\texttt{P}\)</span> is the true distribution of contexts and <span class="math inline">\(\beta\)</span> is a positive real hyperparameter:</p>
+<p><span class="math display">\[ \max_{\text{policy} \pi} \mathbb{E}_{Y \sim \pi(\cdot \mid X), X \sim \texttt{P}}[r(X, Y)] - \beta \mathbb{E}_{X \sim \texttt{P}}[D_{\text{KL}}(\pi( \cdot \mid X) || \pi_{\text{ref}}( \cdot \mid X)] \]</span></p>
+<p>Here, <span class="math inline">\(D_{\text{KL}}\)</span> is KL divergence which is defined as</p>
+<p><span class="math display">\[D_{\text{KL}}(P || Q) = \mathbb{E}_{X \sim P}\left[\log \frac{P(X)}{Q(X)}\right].\]</span></p>
+<p>I had to refer to the <a href="https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence">Wikipedia page</a> while looking up the definition of KL, and the following seems to be an application of Donsker-Varadhan. But that is somewhat difficult to read and intuitively get.</p>
+<p>Let’s pretend that <span class="math inline">\(\mathcal{X}\)</span> and <span class="math inline">\(\mathcal{Y}\)</span> are countable for simplicity (which it is for LLMs) and <span class="math inline">\(r\)</span> is bounded (which I believe is necessary). We can reformulate the above objective as follows:</p>
+<p><span class="math display">\[ \max_{\text{policy}\ \pi} \mathbb{E}_{Y \sim \pi(\cdot \mid X), X \sim \texttt{P}}[r(X, Y) - \beta \log \pi(Y \mid X) + \beta \log \pi_{\text{ref}}(Y \mid X)].\]</span></p>
+<p>Now, we will proceed by realizing that the KL minimizer of a distribution <span class="math inline">\(\texttt{P}\)</span> is <span class="math inline">\(\texttt{P}\)</span> itself — forward or reverse (what we’re doing here is reverse) KL, it’s all the same. So instead of doing KKT or something, we can just make a distribution. The above optimization formula can now be formulated</p>
+<p><span class="math display">\[ \max_{\text{policy}\ \pi} \beta \sum_{x \in \mathcal{X}} \sum_{y \in \mathcal{Y}} ((r(x, y) / \beta + \log \pi_{\text{ref}}(y \mid x) - \log \pi(y \mid x)) \pi(y \mid x) \cdot \texttt{P}(x).\]</span></p>
+<p>Well let’s focus on the inner optimization, since we are now choosing a different probability distribution for each value of <span class="math inline">\(x \in \mathcal{X}\)</span>. We will also add a constant <span class="math inline">\(z(x)\)</span> (which is fine since it’s a constant):</p>
+<p><span class="math display">\[ \max_{\text{distribution}\ \pi(\cdot \mid x)} \beta  \sum_{y \in \mathcal{Y}} ((r(x, y) / \beta + \log \pi_{\text{ref}}(y \mid x) + \log z(x) - \log \pi(y \mid x)) \pi(y \mid x)\]</span></p>
+<p>where</p>
+<p><span class="math display">\[z(x) = \sum_{y \in \mathcal{Y}}\pi_{\text{ref}}(y \mid x)\exp(r(x, y) / \beta).\]</span></p>
+<p>Our reason for doing so is because we can now define the probability distribution:</p>
+<p><span class="math display">\[ \pi^*(y \mid x) = \frac{\pi_{\text{ref}}(y \mid x)\exp(r(x, y) / \beta)}{z(x)}\]</span></p>
+<p>and substitute it into our inner maximization to get that</p>
+<p><span class="math display">\[ \max_{\text{distribution}\ \pi(\cdot \mid x)} \beta D_{\text{KL}}(\pi(\cdot \mid x) || \pi^*(\cdot \mid x)). \]</span></p>
+<p>Naturally picking <span class="math inline">\(\pi = \pi^*\)</span> maximizes this, and we get that <span class="math inline">\(\pi^*\)</span> is the solution to PPO. No one has been super interested in this solution previously because we don’t have access to <span class="math inline">\(r(x, y)\)</span> possibly? Perhaps it was useful to inverse RL people.</p>
 
 
 
-</section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
-<div id="ref-robbins1970statistical" class="csl-entry" role="listitem">
-Robbins, Herbert. 1970. <span>“Statistical Methods Related to the Law of the Iterated Logarithm.”</span> <em>The Annals of Mathematical Statistics</em> 41 (5): 1397–409.
+<div id="ref-rlhf2026lambert" class="csl-entry" role="listitem">
+Lambert, Nathan. 2026. <em>Reinforcement Learning from Human Feedback</em>. Online. <a href="https://rlhfbook.com">https://rlhfbook.com</a>.
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

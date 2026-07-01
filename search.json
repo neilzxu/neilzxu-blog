@@ -2,23 +2,9 @@
   {
     "objectID": "posts/welcome/index.html",
     "href": "posts/welcome/index.html",
-    "title": "A first math note",
+    "title": "A note on PPO",
     "section": "",
-    "text": "This is a sample post showing the authoring workflow for the blog. You can edit this file in VS Code with the Quarto extension and use the visual editor when that is helpful.\nInline math works with dollar delimiters, as in \\(X_1, \\ldots, X_n \\sim P\\). Display math works with double-dollar delimiters:\n\\[\n\\bar X_n = \\frac{1}{n}\\sum_{i=1}^n X_i.\n\\]\nFor example, if \\(X_i\\) are independent with mean \\(\\mu\\), then\n\\[\n\\mathbb{E}[\\bar X_n] = \\mu.\n\\]"
-  },
-  {
-    "objectID": "posts/welcome/index.html#theorem-style-writing",
-    "href": "posts/welcome/index.html#theorem-style-writing",
-    "title": "A first math note",
-    "section": "Theorem-style writing",
-    "text": "Theorem-style writing\nYou can write theorem-like blocks directly in Markdown:\nLemma. Let \\(X\\) be integrable. Then for any constant \\(a\\),\n\\[\n\\mathbb{E}[X - a] = \\mathbb{E}[X] - a.\n\\]\nProof. This follows by linearity of expectation. \\(\\square\\)\nCitations also work through Pandoc and Quarto; for example, see (Robbins 1970)."
-  },
-  {
-    "objectID": "posts/welcome/index.html#code",
-    "href": "posts/welcome/index.html#code",
-    "title": "A first math note",
-    "section": "Code",
-    "text": "Code\nimport numpy as np\n\nx = np.array([1.0, 2.0, 3.0])\nx.mean()"
+    "text": "A lot of RL algorithms of late are focusing on KL divergence. Since it’s a core interview question, let’s work through the RLHF + PPO formulation and its relation to DPO. The first part of which is getting an analytic representation of the optimal policy. Everything I have learned about RL I have learned from Lambert (2026) or GPT and below is no exception.\nOk, so we take for granted that the PPO objective is a good idea, which not everyone does. What is it anyways?\nLet \\(r\\) be our reward function that takes in a context \\(x\\) and a completion \\(y\\), i.e., the LLM output based on \\(x\\). Thus, \\(r(x, y)\\) is the reward or “goodness” or the completion \\(y\\) for \\(x\\). Somehow, we never see this reward in real life.\nWe can let \\(\\mathcal{Y}\\) be the (discrete) domain of \\(y\\).\n\\(\\pi_{\\text{ref}}\\) is reference policy that we wish to stay close in KL distance to. Why do we do this? I’m not sure really, especially since PPO has different roots than from RL on LLMs. “Our experiments test PPO on a collection of benchmark tasks, including simulated robotic locomotion and Atari game playing, and we show that PPO outperforms other online policy gradient methods, and overall strikes a favorable balance between sample complexity, simplicity, and wall-time.” Huh.\nThen, the PPO objective is to solve the following optimization problem, where \\(\\texttt{P}\\) is the true distribution of contexts and \\(\\beta\\) is a positive real hyperparameter:\n\\[ \\max_{\\text{policy} \\pi} \\mathbb{E}_{Y \\sim \\pi(\\cdot \\mid X), X \\sim \\texttt{P}}[r(X, Y)] - \\beta \\mathbb{E}_{X \\sim \\texttt{P}}[D_{\\text{KL}}(\\pi( \\cdot \\mid X) || \\pi_{\\text{ref}}( \\cdot \\mid X)] \\]\nHere, \\(D_{\\text{KL}}\\) is KL divergence which is defined as\n\\[D_{\\text{KL}}(P || Q) = \\mathbb{E}_{X \\sim P}\\left[\\log \\frac{P(X)}{Q(X)}\\right].\\]\nI had to refer to the Wikipedia page while looking up the definition of KL, and the following seems to be an application of Donsker-Varadhan. But that is somewhat difficult to read and intuitively get.\nLet’s pretend that \\(\\mathcal{X}\\) and \\(\\mathcal{Y}\\) are countable for simplicity (which it is for LLMs) and \\(r\\) is bounded (which I believe is necessary). We can reformulate the above objective as follows:\n\\[ \\max_{\\text{policy}\\ \\pi} \\mathbb{E}_{Y \\sim \\pi(\\cdot \\mid X), X \\sim \\texttt{P}}[r(X, Y) - \\beta \\log \\pi(Y \\mid X) + \\beta \\log \\pi_{\\text{ref}}(Y \\mid X)].\\]\nNow, we will proceed by realizing that the KL minimizer of a distribution \\(\\texttt{P}\\) is \\(\\texttt{P}\\) itself — forward or reverse (what we’re doing here is reverse) KL, it’s all the same. So instead of doing KKT or something, we can just make a distribution. The above optimization formula can now be formulated\n\\[ \\max_{\\text{policy}\\ \\pi} \\beta \\sum_{x \\in \\mathcal{X}} \\sum_{y \\in \\mathcal{Y}} ((r(x, y) / \\beta + \\log \\pi_{\\text{ref}}(y \\mid x) - \\log \\pi(y \\mid x)) \\pi(y \\mid x) \\cdot \\texttt{P}(x).\\]\nWell let’s focus on the inner optimization, since we are now choosing a different probability distribution for each value of \\(x \\in \\mathcal{X}\\). We will also add a constant \\(z(x)\\) (which is fine since it’s a constant):\n\\[ \\max_{\\text{distribution}\\ \\pi(\\cdot \\mid x)} \\beta  \\sum_{y \\in \\mathcal{Y}} ((r(x, y) / \\beta + \\log \\pi_{\\text{ref}}(y \\mid x) + \\log z(x) - \\log \\pi(y \\mid x)) \\pi(y \\mid x)\\]\nwhere\n\\[z(x) = \\sum_{y \\in \\mathcal{Y}}\\pi_{\\text{ref}}(y \\mid x)\\exp(r(x, y) / \\beta).\\]\nOur reason for doing so is because we can now define the probability distribution:\n\\[ \\pi^*(y \\mid x) = \\frac{\\pi_{\\text{ref}}(y \\mid x)\\exp(r(x, y) / \\beta)}{z(x)}\\]\nand substitute it into our inner maximization to get that\n\\[ \\max_{\\text{distribution}\\ \\pi(\\cdot \\mid x)} \\beta D_{\\text{KL}}(\\pi(\\cdot \\mid x) || \\pi^*(\\cdot \\mid x)). \\]\nNaturally picking \\(\\pi = \\pi^*\\) maximizes this, and we get that \\(\\pi^*\\) is the solution to PPO. No one has been super interested in this solution previously because we don’t have access to \\(r(x, y)\\) possibly? Perhaps it was useful to inverse RL people.\n\n\n\n\nReferences\n\nLambert, Nathan. 2026. Reinforcement Learning from Human Feedback. Online. https://rlhfbook.com."
   },
   {
     "objectID": "about.html",
@@ -32,6 +18,6 @@
     "href": "index.html",
     "title": "Blog",
     "section": "",
-    "text": "Notes on statistics, machine learning, and research.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nA first math note\n\n\n\nstatistics\n\nmath\n\n\n\nA sample Quarto post with TeX math, citations, and theorem-style writing.\n\n\n\n\n\nJul 1, 2026\n\n\nNeil Xu\n\n\n\n\n\nNo matching items"
+    "text": "Notes on statistics, machine learning, and research.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nA note on PPO\n\n\n\nLLM\n\nRL\n\n\n\nThe first half of the DPO formula\n\n\n\n\n\nJun 30, 2026\n\n\nNeil\n\n\n\n\n\nNo matching items"
   }
 ]
